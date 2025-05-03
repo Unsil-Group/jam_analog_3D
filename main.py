@@ -4,6 +4,18 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
+from models.base_tower import draw_base_tower
+
+#Initialize 3D object
+def init_objects():
+    global base_tower_list
+    base_tower_list = glGenLists(1)
+
+    # Compile Clock Tower base
+    glNewList(base_tower_list, GL_COMPILE)
+    draw_base_tower()
+    glEndList()
+
 def main():
     pygame.init()
     display = (1280, 720)
@@ -14,6 +26,8 @@ def main():
     gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
     glTranslatef(0.0, -1.0, -10.0)
     glEnable(GL_DEPTH_TEST)
+
+    init_objects()
 
     #Control Mouse Variable
     clock = pygame.time.Clock()
@@ -71,6 +85,8 @@ def main():
         glVertex3f(10, -0.01, 10)
         glVertex3f(-10, -0.01, 10)
         glEnd()
+
+        glCallList(base_tower_list)
 
         #Update display
         pygame.display.flip()
