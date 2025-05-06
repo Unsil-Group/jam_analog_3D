@@ -5,15 +5,22 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 from models.base_tower import draw_base_tower
+from models.tree import draw_tree
 
 #Initialize 3D object
 def init_objects():
-    global base_tower_list
+    global base_tower_list, tree_list
     base_tower_list = glGenLists(1)
+    tree_list = glGenLists(1)
 
     # Compile Clock Tower base
     glNewList(base_tower_list, GL_COMPILE)
     draw_base_tower()
+    glEndList()
+
+    # Compile Trees
+    glNewList(tree_list, GL_COMPILE)
+    draw_tree()
     glEndList()
 
 def main():
@@ -87,6 +94,14 @@ def main():
         glEnd()
 
         glCallList(base_tower_list)
+
+        # Place trees around the scene
+        for angle in range(0, 360, 45):
+            glPushMatrix()
+            glRotatef(angle, 0, 1, 0)
+            glTranslatef(3.0, -0.5, 0)
+            glCallList(tree_list)
+            glPopMatrix()
 
         #Update display
         pygame.display.flip()
