@@ -6,6 +6,7 @@ from OpenGL.GLU import *
 
 from models.base_tower import draw_base_tower
 from models.bench import draw_bench
+from models.city_buildings import draw_city_buildings
 from models.clock import draw_clock_face
 from models.tree import draw_tree
 
@@ -14,9 +15,11 @@ from models.tree import draw_tree
 def init_objects():
     global base_tower_list, tree_list
     global base_tower_list, bench_list
+    global base_tower_list, building_list
     base_tower_list = glGenLists(1)
     bench_list = glGenLists(1)
     tree_list = glGenLists(1)
+    building_list = glGenlists(1)
 
     # Compile Clock Tower base
     glNewList(base_tower_list, GL_COMPILE)
@@ -31,6 +34,11 @@ def init_objects():
     # Compile Benches
     glNewList(bench_list, GL_COMPILE)
     draw_bench()
+    glEndList()
+    
+    #Compile Buildings
+    glNewList(building_list, GL_COMPILE)
+    draw_city_buildings()
     glEndList()
 
 
@@ -107,6 +115,7 @@ def main():
         glEnd()
 
         glCallList(base_tower_list)
+        glCallList(building_list)
 
         # Draw clock faces on all 4 sides of the tower
         for i in range(4):
@@ -117,7 +126,7 @@ def main():
             glPopMatrix()
 
         # Place trees around the scene
-        for angle in range(0, 360, 45):
+        for angle in range(0, 360, 75):
             glPushMatrix()
             glRotatef(angle, 0, 1, 0)
             glTranslatef(3.0, -0.5, 0)
