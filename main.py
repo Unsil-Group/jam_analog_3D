@@ -19,7 +19,7 @@ def init_objects():
     base_tower_list = glGenLists(1)
     bench_list = glGenLists(1)
     tree_list = glGenLists(1)
-    building_list = glGenlists(1)
+    building_list = glGenLists(1)
 
     # Compile Clock Tower base
     glNewList(base_tower_list, GL_COMPILE)
@@ -35,8 +35,8 @@ def init_objects():
     glNewList(bench_list, GL_COMPILE)
     draw_bench()
     glEndList()
-    
-    #Compile Buildings
+
+    # Compile Buildings
     glNewList(building_list, GL_COMPILE)
     draw_city_buildings()
     glEndList()
