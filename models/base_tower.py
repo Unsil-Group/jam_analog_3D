@@ -42,16 +42,16 @@ def draw_base_tower():
 
 
 
-    # Straight roads
+     # Straight roads
     glColor3f(0.3, 0.3, 0.3)
     for i in range(4):
         glPushMatrix()
         glRotatef(90 * i, 0, 1, 0)
         glBegin(GL_QUADS)
-        glVertex3f(-1.5, 0, -0.5)
-        glVertex3f(1.5, 0, -0.5)
-        glVertex3f(1.5, 0, 0.5)
-        glVertex3f(-1.5, 0, 0.5)
+        glVertex3f(-1.5,-0.45, -0.5)
+        glVertex3f(1.5,-0.45, -0.5)
+        glVertex3f(1.5,-0.45,0.5)
+        glVertex3f(-1.5,-0.45, 0.5)
         glEnd()
         glPopMatrix()
 
